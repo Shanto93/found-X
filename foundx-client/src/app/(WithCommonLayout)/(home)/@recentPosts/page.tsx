@@ -11,13 +11,13 @@ const RecentPosts = async () => {
   return (
     <div>
       <div className="section-title my-8">
-        <h2 className="text-center mb-2 text-2xl">Recently Found Items</h2>
-        <p className="text-center">
+        <h2 className="text-center font-semibold mb-2 text-xl md:text-2xl">Recently Found Items</h2>
+        <p className="text-center sm:text-sm md:text-lg">
           A list of items that have been recently found and reported.
         </p>
       </div>
 
-      <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-4">
+      <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-3">
         {posts.map((post: IPost) => (
           <Card key={post._id} post={post}></Card>
         ))}

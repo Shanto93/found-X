@@ -26,7 +26,7 @@ const Card = ({ post }: { post: IPost }) => {
       <Image
         removeWrapper
         alt="Card example background"
-        className="z-0 h-full w-full -tanslate-y-6 object-cover"
+        className="scale-125 z-0 h-full w-full -tanslate-y-6 object-cover"
         src={images[0]}
       ></Image>
 
