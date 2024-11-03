@@ -16,7 +16,7 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/theme-switch";
+import { ThemeSwitch } from "@/src/components/ui/theme-switch";
 import {
   TwitterIcon,
   GithubIcon,
@@ -49,7 +49,7 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar className="max-w-screen-lg mx-auto" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
