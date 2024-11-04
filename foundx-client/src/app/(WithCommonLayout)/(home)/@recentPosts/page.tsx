@@ -7,7 +7,7 @@ import Card from "@/src/components/ui/Card";
 
 const RecentPosts = async () => {
   const { data: posts } = await getRecentPosts();
-  console.log("Recent Posts are2: ", posts);
+  // console.log("Recent Posts : ", posts);
   return (
     <div>
       <div className="section-title my-8">
