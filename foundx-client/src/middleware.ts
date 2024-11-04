@@ -13,12 +13,13 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Mock user data for testing
-  const user = {
-    name: "Shanto Islam",
-    email: "shantoislam123@gmail.com",
-    token: "kansdkanj",
-    role: "USER",
-  };
+  const user = undefined;
+//   const user = {
+//     name: "Shanto Islam",
+//     email: "shantoislam123@gmail.com",
+//     token: "kansdkanj",
+//     role: "USER",
+//   };
 
   // If user is not authenticated, allow access only to AuthRoutes
   if (!user) {
