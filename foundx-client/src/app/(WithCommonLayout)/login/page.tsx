@@ -5,6 +5,8 @@ import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/src/schemas/login.schema";
 
 type TLoginFormData = {
   email: string;
@@ -26,7 +28,7 @@ const Login = () => {
         <Image className="w-full" alt="Login Page Image" src="/login02.svg" />
       </div>
       <div className="flex-1 px-10">
-        <FXForm onSubmit={onSubmit}>
+        <FXForm onSubmit={onSubmit} resolver={zodResolver(loginSchema)}>
           <div className="w-4/5 flex flex-col gap-y-5">
             <div>
               <h2 className="text-center text-2xl font-bold">
