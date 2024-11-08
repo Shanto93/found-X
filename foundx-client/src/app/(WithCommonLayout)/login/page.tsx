@@ -7,14 +7,16 @@ import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/src/schemas/login.schema";
+import type { FieldValues, SubmitHandler } from "react-hook-form";
+import { Link } from "@nextui-org/link";
 
-type TLoginFormData = {
-  email: string;
-  password: string;
-};
+// type TLoginFormData = {
+//   email: string;
+//   password: string;
+// };
 
 const Login = () => {
-  const onSubmit = (data: TLoginFormData) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
   };
 
@@ -81,7 +83,7 @@ const Login = () => {
             <div>
               <p className="text-center">
                 Don't have account?{" "}
-                <span className="text-blue-500">Register</span>
+                <span className="text-blue-500"><Link href="/register">Register</Link></span>
               </p>
             </div>
           </div>
