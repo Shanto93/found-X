@@ -1,4 +1,5 @@
 "use client";
+
 import FXForm from "@/src/components/form/FXForm";
 import FXInput from "@/src/components/form/FXInput";
 import { Button } from "@nextui-org/button";
@@ -6,26 +7,26 @@ import { Image } from "@nextui-org/image";
 import React from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "@/src/schemas/login.schema";
 import type { FieldValues, SubmitHandler } from "react-hook-form";
 import { registerSchema } from "@/src/schemas/register.schema";
 import { Link } from "@nextui-org/link";
-import { postRegisterData } from "@/src/services/AuthServices";
-
-// type TLoginFormData = {
-//   email: string;
-//   password: string;
-// };
+import { useUserRegistration } from "@/src/hooks/auth.hook";
 
 const Register = () => {
+  const { mutate: handleRegisterUser, data, isPending } = useUserRegistration();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = {
       ...data,
       profilePhoto: "https://ibb.co.com/xmMj14T",
     };
-    console.log("Inside form user data", userData);
-    await postRegisterData(userData);
+    // console.log("Inside form user data", userData);
+    handleRegisterUser(userData);
   };
+
+  if (isPending) {
+    // handle loading state
+  }
 
   //Eye icon visibility
   const [isVisible, setIsVisible] = React.useState(false);
