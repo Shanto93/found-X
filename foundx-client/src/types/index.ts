@@ -4,25 +4,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-// export interface IPost {
-//   title: string
-//   description: string
-//   images: string[]
-//   location: string
-//   city: string
-//   dateFound: string
-//   status: string
-//   isReported: boolean
-//   reportCount: number
-//   category: string
-//   user: string
-//   questions: string[]
-//   _id: string
-//   createdAt: string
-//   updatedAt: string
-//   __v: number
-// }
-
 export interface ICategory {
   _id: string;
   name: string;
@@ -41,9 +22,9 @@ export interface IUser {
   status: "ACTIVE" | "INACTIVE" | "SUSPENDED";
   mobileNumber: string;
   profilePhoto: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  createdAt?: string;
+  updatedAt?: string;
+  __v?: number;
 }
 
 export interface IPost {

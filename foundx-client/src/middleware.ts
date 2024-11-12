@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { currentUser } from "./services/AuthServices";
 
 type TRole = keyof typeof rolebasedRoutes;
 
@@ -9,17 +10,19 @@ const rolebasedRoutes = {
   ADMIN: [/^\/admin/],
 };
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const userToken = await currentUser();
+  console.log(userToken);
 
   // Mock user data for testing
   const user = undefined;
-//   const user = {
-//     name: "Shanto Islam",
-//     email: "shantoislam123@gmail.com",
-//     token: "kansdkanj",
-//     role: "USER",
-//   };
+  //   const user = {
+  //     name: "Shanto Islam",
+  //     email: "shantoislam123@gmail.com",
+  //     token: "kansdkanj",
+  //     role: "USER",
+  //   };
 
   // If user is not authenticated, allow access only to AuthRoutes
   if (!user) {
