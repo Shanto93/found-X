@@ -17,6 +17,10 @@ export const siteConfig = {
       label: "Found Items",
       href: "/found-items",
     },
+    {
+      label: "Profile",
+      href: "/profile",
+    },
   ],
   navMenuItems: [
     {
@@ -31,6 +35,10 @@ export const siteConfig = {
     {
       label: "Found Items",
       href: "/found-items",
+    },
+    {
+      label: "Profile",
+      href: "/profile",
     },
   ],
 };

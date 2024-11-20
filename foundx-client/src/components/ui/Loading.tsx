@@ -3,7 +3,7 @@ import { Progress } from "@nextui-org/progress";
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center bg-black/10 h-screen fixed inset-0 z-20 backdrop-blur-md">
+    <div className="flex justify-center items-center bg-black/10 h-screen fixed inset-0 z-50 backdrop-blur-md">
       <Progress
         size="sm"
         isIndeterminate

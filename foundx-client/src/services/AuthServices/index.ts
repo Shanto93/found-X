@@ -40,6 +40,11 @@ export const postLoginData = async (userData: FieldValues) => {
   }
 };
 
+export const logout = async () => {
+  (await cookies()).delete("access token");
+  (await cookies()).delete("refresh token");
+};
+
 export const currentUser = async () => {
   const accessToken = (await cookies()).get("access token")?.value;
   let decodedToken = null;

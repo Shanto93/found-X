@@ -11,22 +11,37 @@ import type { FieldValues, SubmitHandler } from "react-hook-form";
 import { Link } from "@nextui-org/link";
 import { useUserLogin } from "@/src/hooks/auth.hook";
 import Loading from "@/src/components/ui/Loading";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Login = () => {
-  const { mutate: handleUserLogin, isPending } = useUserLogin();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const redirect = searchParams.get("redirect");
+
+  const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
+  console.log(redirect);
+
+  React.useEffect(() => {
+    if (!isPending && isSuccess) {
+      if (redirect) {
+        router.push(redirect);
+      } else {
+        router.push("/");
+      }
+    }
+  }, [isPending, isSuccess]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // console.log(data);
     handleUserLogin(data);
   };
 
-  //Eye icon visibility
   const [isVisible, setIsVisible] = React.useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <>
-      {isPending && <Loading></Loading>}
+      {isPending && <Loading />}
       <div className="w-full h-screen md:flex justify-center items-center">
         <div className="flex-1">
           <Image className="w-full" alt="Login Page Image" src="/login02.svg" />
@@ -84,7 +99,7 @@ const Login = () => {
               </Button>
               <div>
                 <p className="text-center">
-                  Don't have account?{" "}
+                  Don't have an account?{" "}
                   <span className="text-blue-500">
                     <Link href="/register">Register</Link>
                   </span>

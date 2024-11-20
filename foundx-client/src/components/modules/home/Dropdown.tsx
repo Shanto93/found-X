@@ -22,7 +22,10 @@ const DropdownUser = () => {
         <DropdownTrigger>
           <Avatar name="Jane" />
         </DropdownTrigger>
-        <DropdownMenu aria-label="Static Actions">
+        <DropdownMenu
+          aria-label="Static Actions"
+          className="bg-red-600 text-green-500"
+        >
           <DropdownItem
             onClick={() => {
               handleRoutes("/profile");
@@ -55,6 +58,7 @@ const DropdownUser = () => {
             onClick={() => {
               handleRoutes("/profile/settings");
             }}
+            className="text-green-500 bg-yellow-500"
           >
             Settings
           </DropdownItem>
