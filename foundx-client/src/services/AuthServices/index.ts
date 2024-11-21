@@ -5,8 +5,9 @@ interface JwtPayload {
   name: string;
   email: string;
   mobileNumber: string;
-  role: string;
-  status: string;
+  role: "USER" | "ADMIN";
+  status: "ACTIVE" | "INACTIVE" | "SUSPENDED";
+  profilePhoto: string;
 }
 
 import { axiosInstance } from "@/src/lib/axiosInstance";
@@ -45,22 +46,51 @@ export const logout = async () => {
   (await cookies()).delete("refresh token");
 };
 
-export const currentUser = async () => {
-  const accessToken = (await cookies()).get("access token")?.value;
-  let decodedToken = null;
+// export const currentUser = async () => {
+//   const accessToken = (await cookies()).get("access token")?.value;
+//   let decodedToken = null;
 
-  if (accessToken) {
-    decodedToken = jwtDecode<JwtPayload>(accessToken);
-    // console.log(decodeToken);
+//   if (accessToken) {
+//     decodedToken = jwtDecode<JwtPayload>(accessToken);
+//     // console.log(decodeToken);
+//     return {
+//       _id: decodedToken._id,
+//       name: decodedToken.name,
+//       email: decodedToken.email,
+//       mobileNumber: decodedToken.mobileNumber,
+//       role: decodedToken.role,
+//       status: decodedToken.status,
+//       profilePhoto: decodedToken.profilePhoto,
+//     };
+//   }
+
+//   return decodedToken;
+// };
+
+export const currentUser = async () => {
+  const cookiesInstance = await cookies();
+  const accessToken = cookiesInstance.get("access token")?.value;
+
+  if (!accessToken) return null;
+
+  try {
+    const decodedToken = jwtDecode<JwtPayload>(accessToken);
+
+    if (decodedToken.role !== "USER" && decodedToken.role !== "ADMIN") {
+      throw new Error("Invalid role in token");
+    }
+
     return {
       _id: decodedToken._id,
       name: decodedToken.name,
       email: decodedToken.email,
       mobileNumber: decodedToken.mobileNumber,
-      role: decodedToken.role,
+      role: decodedToken.role, // Guaranteed to be "USER" or "ADMIN"
       status: decodedToken.status,
+      profilePhoto: decodedToken.profilePhoto,
     };
+  } catch (error) {
+    console.error("Error decoding token:", error);
+    return null; // Return null if decoding fails
   }
-
-  return decodedToken;
 };
