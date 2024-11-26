@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-    --navbar-height: 4rem; /* Adjust the height of the navbar */
-  }
-  
-  /* If you need to override specific classes */
-  .navbar {
-    height: var(--navbar-height);
-  }
+  --navbar-height: 4rem; /* Adjust the height of the navbar */
+}
+
+/* If you need to override specific classes */
+.navbar {
+  height: var(--navbar-height);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

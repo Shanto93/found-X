@@ -18,9 +18,10 @@ const DropdownUser = () => {
   };
   return (
     <div>
-      <Dropdown className="cursor-pointer">
+      <Dropdown className="cursor-pointer bg-red-600">
         <DropdownTrigger>
-          <Avatar name="Jane" />
+          {/* <Avatar name="Jane" /> */}
+          <p className="cursor-pointer">Dashboard</p>
         </DropdownTrigger>
         <DropdownMenu
           aria-label="Static Actions"

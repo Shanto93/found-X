@@ -1,4 +1,5 @@
-import React, { createContext, useEffect, useState } from "react";
+"use client"
+import React, { createContext, useContext, useEffect, useState } from "react";
 import type { IUser } from "../types";
 import { currentUser } from "../services/AuthServices";
 
@@ -22,7 +23,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     handleUser();
-  }, []);
+  }, [isLoading]);
 
   const userInfo = {
     user,
@@ -34,6 +35,15 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <UserContext.Provider value={userInfo}>{children}</UserContext.Provider>
   );
+};
+
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (context === undefined) {
+    throw new Error("User must be within the UserProvider context.");
+  }
+
+  return context;
 };
 
 export default UserProvider;

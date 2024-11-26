@@ -7,7 +7,6 @@ import Card from "@/src/components/ui/Card";
 import CardSkeleton from "@/src/components/ui/CardSkeleton";
 
 const RecentPosts = async () => {
-
   return (
     <div>
       <div className="section-title my-8">
@@ -18,8 +17,8 @@ const RecentPosts = async () => {
       </div>
 
       <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-3">
-        {[...Array(9)].map(() => (
-          <CardSkeleton></CardSkeleton>
+        {[...Array(9)].map((_, index) => (
+          <CardSkeleton key={index + 1}></CardSkeleton>
         ))}
       </div>
 

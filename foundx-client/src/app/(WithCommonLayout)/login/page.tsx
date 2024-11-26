@@ -12,10 +12,12 @@ import { Link } from "@nextui-org/link";
 import { useUserLogin } from "@/src/hooks/auth.hook";
 import Loading from "@/src/components/ui/Loading";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useUser } from "@/src/context/user.context";
 
 const Login = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { setIsLoading: userLoading } = useUser();
 
   const redirect = searchParams.get("redirect");
 
@@ -34,6 +36,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleUserLogin(data);
+    userLoading(true);
   };
 
   const [isVisible, setIsVisible] = React.useState(false);
