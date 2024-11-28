@@ -59,7 +59,7 @@ const DropdownUser = () => {
             onClick={() => {
               handleRoutes("/profile/settings");
             }}
-            className="text-green-500 bg-yellow-500"
+            className="text-green-500"
           >
             Settings
           </DropdownItem>

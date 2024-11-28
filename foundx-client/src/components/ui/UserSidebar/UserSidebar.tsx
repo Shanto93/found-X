@@ -24,7 +24,7 @@ const UserSidebar = () => {
           color="primary"
           variant="bordered"
           className="mt-2 w-full"
-          href="/dashboard/profile/createPost"
+          href="/dashboard/profile/create-post"
         >
           Create Post
         </Button>

@@ -9,7 +9,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         <div className="md:w-2/5 ml-5">
           <UserSidebar></UserSidebar>
         </div>
-        <div className="w-full bg-yellow-500 ml-5">
+        <div className="w-full ml-5">
           {children}
         </div>
       </div>
