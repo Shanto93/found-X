@@ -7,16 +7,11 @@ import { MdWifiFind } from "react-icons/md";
 
 const SideBar = () => {
   return (
-    <div className="w-60 bg-[#130f40] min-h-screen text-black dark:text-white">
+    <div className=" bg-[#130f40] min-h-screen text-black dark:text-white">
       <ul className="flex flex-col items-center justify-center pt-5 gap-y-3">
-        <Link href="/dashboard/content">
-          <li className="text-white">Content 1</li>
+        <Link href="/dashboard/profile">
+          <li className="text-white">Profile</li>
         </Link>
-        <Link href="/dashboard/contentt">
-          <li className="text-white">Content 2</li>
-        </Link>
-        <li className="text-white">Content 4</li>
-        <li className="text-white">Content 4</li>
       </ul>
 
       <Divider className="my-4 text-white" />

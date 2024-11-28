@@ -4,11 +4,11 @@ import React from "react";
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="w-full mx-auto">
-      <div className="flex">
-        <div>
+      <div className="md:flex">
+        <div className="md:w-1/5">
           <SideBar></SideBar>
         </div>
-        <div className="ml-7">
+        <div className="w-full">
           {children}
         </div>
       </div>

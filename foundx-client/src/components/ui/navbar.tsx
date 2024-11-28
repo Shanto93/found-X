@@ -21,6 +21,7 @@ import { Logo } from "@/src/components/icons";
 import { Button } from "@nextui-org/button";
 import { logout } from "@/src/services/AuthServices";
 import { useUser } from "@/src/context/user.context";
+import { Avatar } from "@nextui-org/avatar";
 
 export const Navbar = () => {
   const { user, setIsLoading: userLoading } = useUser();
@@ -73,7 +74,8 @@ export const Navbar = () => {
         {user?.email && (
           <NavbarItem className="hidden sm:flex gap-2">
             <Link href="/dashboard">
-              <BsThreeDots className="text-3xl text-black dark:text-white" />
+              <Avatar src={user?.profilePhoto} />
+              {/* <BsThreeDots className="text-3xl text-black dark:text-white" /> */}
             </Link>
           </NavbarItem>
         )}
@@ -83,13 +85,14 @@ export const Navbar = () => {
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <ThemeSwitch />
         <Link href="/dashboard">
-          <BsThreeDots className="text-3xl text-black dark:text-white" />
+          <Avatar src={user?.profilePhoto} />
+          {/* <BsThreeDots className="text-3xl text-black dark:text-white" /> */}
         </Link>
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div className=" mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={index}>
               <Link
