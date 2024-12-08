@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Input, InputProps } from "@nextui-org/input";
 import React from "react";

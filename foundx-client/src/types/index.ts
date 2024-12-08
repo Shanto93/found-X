@@ -45,3 +45,11 @@ export interface IPost {
   updatedAt: string;
   __v: number;
 }
+
+export interface IInput {
+  required?: boolean;
+  name: string;
+  label: string;
+  placeholder?: string;
+  type?: string;
+}

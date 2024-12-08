@@ -12,12 +12,12 @@ const UserSidebar = () => {
   return (
     <div>
       <div className="rounded-xl bg-default-100 p-2">
-        <div className="h-[250px] w-full rounded-md">
+        <div className="md:h-[250px] w-full rounded-md">
           <h2>Ekhane Profile picture</h2>
         </div>
         <div className="my-3">
-          <h1 className="text-2xl font-semibold">Mofiz</h1>
-          <p className="text-sm break-words">mofiz@gmail.com</p>
+          <h1 className="text-2xl font-semibold">{user?.name}</h1>
+          <p className="text-sm break-words">{user?.email}</p>
         </div>
         <Button
           as={Link}

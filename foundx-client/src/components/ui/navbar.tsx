@@ -22,12 +22,19 @@ import { Button } from "@nextui-org/button";
 import { logout } from "@/src/services/AuthServices";
 import { useUser } from "@/src/context/user.context";
 import { Avatar } from "@nextui-org/avatar";
+import { usePathname, useRouter } from "next/navigation";
+import { ProtectedRoutes } from "@/src/app/protectedRoutes";
 
 export const Navbar = () => {
   const { user, setIsLoading: userLoading } = useUser();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
+    if (ProtectedRoutes.some((route) => pathname.match(route))) {
+      router.push("/");
+    }
     userLoading(true);
   };
   return (
@@ -75,7 +82,6 @@ export const Navbar = () => {
           <NavbarItem className="hidden sm:flex gap-2">
             <Link href="/dashboard">
               <Avatar src={user?.profilePhoto} />
-              {/* <BsThreeDots className="text-3xl text-black dark:text-white" /> */}
             </Link>
           </NavbarItem>
         )}
@@ -86,7 +92,6 @@ export const Navbar = () => {
         <ThemeSwitch />
         <Link href="/dashboard">
           <Avatar src={user?.profilePhoto} />
-          {/* <BsThreeDots className="text-3xl text-black dark:text-white" /> */}
         </Link>
         <NavbarMenuToggle />
       </NavbarContent>
