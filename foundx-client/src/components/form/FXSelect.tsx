@@ -21,7 +21,7 @@ const FXSelect = ({ options, name, label }: IProps) => {
     <div className="w-full flex flex-col gap-4">
       <Select
         {...register(name)}
-        className="max-w-xs"
+        className="min-w-full sm:min-w-[225px]"
         label={label}
         variant="bordered"
       >

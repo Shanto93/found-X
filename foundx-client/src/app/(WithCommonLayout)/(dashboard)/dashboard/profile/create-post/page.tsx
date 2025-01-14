@@ -9,13 +9,22 @@ import { Divider } from "@nextui-org/divider";
 import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import FXSelect from "@/src/components/form/FXSelect";
+const address = require("@bangladeshi/bangladesh-address");
 
-const cityOptions = [
-  { key: "dhaka", label: "Dhaka"},
-  { key: "chittagong", label: "Chittagong"},
-  { key: "khulna", label: "Khulna"},
-  { key: "sylhet", label: "Sylhet"},
-]
+type CityOption = {
+  key: string;
+  label: string;
+};
+
+const cityOptions: CityOption[] = address
+  .allDistict()
+  .sort()
+  .map((city: CityOption) => {
+    return {
+      key: city,
+      label: city,
+    };
+  });
 
 const CreatePost: React.FC = () => {
   const methods = useForm();
@@ -46,7 +55,7 @@ const CreatePost: React.FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="px-2">
         <h1 className="text-3xl font-semibold break-words">
           Post a found item
         </h1>
@@ -54,12 +63,12 @@ const CreatePost: React.FC = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
           <FXInput label="Title" name="title"></FXInput>
           <DatePicker
-              selected={dateFound}
-              onChange={(date: Date | null) => setDateFound(date)}
-              placeholderText="Found on"
-              name="dateFound"
-              className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
-            />
+            selected={dateFound}
+            onChange={(date: Date | null) => setDateFound(date)}
+            placeholderText="Found on"
+            name="dateFound"
+            className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
+          />
           <FXInput label="Location" name="location"></FXInput>
           <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
           <FXInput label="Category" name="category"></FXInput>
@@ -69,14 +78,14 @@ const CreatePost: React.FC = () => {
         <Divider className="my-5"></Divider>
 
         <div className="flex items-center justify-between">
-          <h1 className="md:text-xl">Owner verification questions</h1>
+          <h1 className="text-xm md:text-xl">Owner verification questions</h1>
           <Button onClick={() => handleFieldAppend()}>Append</Button>
         </div>
 
         {fields.map((field, index) => (
           <div key={field.id} className="flex items-center justify-between">
             <FXInput
-              className="w-full mr-5"
+              className="w-full md:mr-5"
               name={`questions.${index}.value`}
               label="Questions"
             ></FXInput>
