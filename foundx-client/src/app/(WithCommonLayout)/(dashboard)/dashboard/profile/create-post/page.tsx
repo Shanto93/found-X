@@ -8,6 +8,14 @@ import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
 import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 import DatePicker from "react-datepicker";
+import FXSelect from "@/src/components/form/FXSelect";
+
+const cityOptions = [
+  { key: "dhaka", label: "Dhaka"},
+  { key: "chittagong", label: "Chittagong"},
+  { key: "khulna", label: "Khulna"},
+  { key: "sylhet", label: "Sylhet"},
+]
 
 const CreatePost: React.FC = () => {
   const methods = useForm();
@@ -46,14 +54,14 @@ const CreatePost: React.FC = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
           <FXInput label="Title" name="title"></FXInput>
           <DatePicker
-            selected={dateFound}
-            onChange={(date: Date | null) => setDateFound(date)}
-            placeholderText="Found on"
-            name="dateFound"
-            className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
-          />
+              selected={dateFound}
+              onChange={(date: Date | null) => setDateFound(date)}
+              placeholderText="Found on"
+              name="dateFound"
+              className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
+            />
           <FXInput label="Location" name="location"></FXInput>
-          <FXInput label="City" name="city"></FXInput>
+          <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
           <FXInput label="Category" name="category"></FXInput>
           <FXInput label="Upload Image" name="image"></FXInput>
         </div>
