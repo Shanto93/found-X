@@ -9,17 +9,13 @@ import { Divider } from "@nextui-org/divider";
 import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import FXSelect from "@/src/components/form/FXSelect";
+import { useCategories } from "@/src/hooks/categories.hook";
 const address = require("@bangladeshi/bangladesh-address");
 
-type CityOption = {
-  key: string;
-  label: string;
-};
-
-const cityOptions: CityOption[] = address
+const cityOptions = address
   .allDistict()
   .sort()
-  .map((city: CityOption) => {
+  .map((city: string) => {
     return {
       key: city,
       label: city,
@@ -27,6 +23,19 @@ const cityOptions: CityOption[] = address
   });
 
 const CreatePost: React.FC = () => {
+  const { data: categoryData, isLoading: categoryLoading } = useCategories();
+
+  let categoryOptions: { key: string; label: string }[] = [];
+
+  if (categoryData?.data && !categoryLoading) {
+    categoryOptions = categoryData?.data?.map(
+      (category: { _id: string; name: string }) => ({
+        key: category._id,
+        label: category.name,
+      })
+    );
+  }
+
   const methods = useForm();
   const { control, handleSubmit } = methods;
 
@@ -71,7 +80,12 @@ const CreatePost: React.FC = () => {
           />
           <FXInput label="Location" name="location"></FXInput>
           <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
-          <FXInput label="Category" name="category"></FXInput>
+          {/* <FXInput label="Category" name="category"></FXInput> */}
+          <FXSelect
+            label="Category"
+            name="category"
+            options={categoryOptions}
+          ></FXSelect>
           <FXInput label="Upload Image" name="image"></FXInput>
         </div>
 

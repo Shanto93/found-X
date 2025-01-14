@@ -46,27 +46,6 @@ export const logout = async () => {
   (await cookies()).delete("refresh token");
 };
 
-// export const currentUser = async () => {
-//   const accessToken = (await cookies()).get("access token")?.value;
-//   let decodedToken = null;
-
-//   if (accessToken) {
-//     decodedToken = jwtDecode<JwtPayload>(accessToken);
-//     // console.log(decodeToken);
-//     return {
-//       _id: decodedToken._id,
-//       name: decodedToken.name,
-//       email: decodedToken.email,
-//       mobileNumber: decodedToken.mobileNumber,
-//       role: decodedToken.role,
-//       status: decodedToken.status,
-//       profilePhoto: decodedToken.profilePhoto,
-//     };
-//   }
-
-//   return decodedToken;
-// };
-
 export const currentUser = async () => {
   const cookiesInstance = await cookies();
   const accessToken = cookiesInstance.get("access token")?.value;
