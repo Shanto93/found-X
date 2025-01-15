@@ -23,7 +23,11 @@ const cityOptions = address
   });
 
 const CreatePost: React.FC = () => {
-  const { data: categoryData, isLoading: categoryLoading } = useCategories();
+  const {
+    data: categoryData,
+    isLoading: categoryLoading,
+    isSuccess,
+  } = useCategories();
 
   let categoryOptions: { key: string; label: string }[] = [];
 
@@ -79,12 +83,18 @@ const CreatePost: React.FC = () => {
             className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
           />
           <FXInput label="Location" name="location"></FXInput>
-          <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
+          <FXSelect
+            label="City"
+            name="city"
+            options={cityOptions}
+            disabled={!isSuccess}
+          ></FXSelect>
           {/* <FXInput label="Category" name="category"></FXInput> */}
           <FXSelect
             label="Category"
             name="category"
             options={categoryOptions}
+            disabled={!isSuccess}
           ></FXSelect>
           <FXInput label="Upload Image" name="image"></FXInput>
         </div>

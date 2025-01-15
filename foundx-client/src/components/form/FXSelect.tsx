@@ -10,9 +10,10 @@ interface IProps {
   }[];
   name: string;
   label: string;
+  disabled: boolean;
 }
 
-const FXSelect = ({ options, name, label }: IProps) => {
+const FXSelect = ({ options, name, label, disabled }: IProps) => {
   const {
     register,
     formState: { errors },
@@ -24,6 +25,7 @@ const FXSelect = ({ options, name, label }: IProps) => {
         className="min-w-full sm:min-w-[225px]"
         label={label}
         variant="bordered"
+        isDisabled={disabled}
       >
         {options.map((animal) => (
           <SelectItem key={animal.key}>{animal.label}</SelectItem>
