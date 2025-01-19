@@ -10,7 +10,7 @@ interface IProps {
   }[];
   name: string;
   label: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 const FXSelect = ({ options, name, label, disabled }: IProps) => {

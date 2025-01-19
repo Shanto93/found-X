@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, type ChangeEvent } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns"; // Import date-fns for formatting
 import FXInput from "@/src/components/form/FXInput";
@@ -23,6 +23,15 @@ const cityOptions = address
   });
 
 const CreatePost: React.FC = () => {
+  const [imageUpload, setImageUpload] = useState<File[] | []>([]);
+
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    setImageUpload((prev) => [...prev, file]);
+  };
+
+  console.log(imageUpload);
+
   const {
     data: categoryData,
     isLoading: categoryLoading,
@@ -83,12 +92,7 @@ const CreatePost: React.FC = () => {
             className="peer border-2 w-full mx-auto bg-transparent border-default rounded-xl p-3.5 text-default-500 outline-none focus:ring-2 focus:ring-black dark:focus:ring-white focus:border-none"
           />
           <FXInput label="Location" name="location"></FXInput>
-          <FXSelect
-            label="City"
-            name="city"
-            options={cityOptions}
-            disabled={!isSuccess}
-          ></FXSelect>
+          <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
           {/* <FXInput label="Category" name="category"></FXInput> */}
           <FXSelect
             label="Category"
@@ -96,7 +100,16 @@ const CreatePost: React.FC = () => {
             options={categoryOptions}
             disabled={!isSuccess}
           ></FXSelect>
-          <FXInput label="Upload Image" name="image"></FXInput>
+          {/* <FXInput label="Upload Image" name="image"></FXInput> */}
+          <div
+            onChange={(e) => handleImageUpload(e)}
+            className=" rounded-lg border py-[14px]"
+          >
+            <label className="px-3 text-sm" htmlFor="image">
+              Upload Image
+            </label>
+            <input className="hidden " type="file" name="image" id="image" />
+          </div>
         </div>
 
         <Divider className="my-5"></Divider>
