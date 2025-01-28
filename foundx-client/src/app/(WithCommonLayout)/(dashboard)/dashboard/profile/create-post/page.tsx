@@ -10,6 +10,7 @@ import { useForm, FormProvider, useFieldArray } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import FXSelect from "@/src/components/form/FXSelect";
 import { useCategories } from "@/src/hooks/categories.hook";
+import Image from "next/image";
 const address = require("@bangladeshi/bangladesh-address");
 
 const cityOptions = address
@@ -24,10 +25,20 @@ const cityOptions = address
 
 const CreatePost: React.FC = () => {
   const [imageUpload, setImageUpload] = useState<File[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
+
+  console.log(imagePreview);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
     setImageUpload((prev) => [...prev, file]);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview((prev) => [...prev, reader.result as string]);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   console.log(imageUpload);
@@ -111,6 +122,21 @@ const CreatePost: React.FC = () => {
             <input className="hidden " type="file" name="image" id="image" />
           </div>
         </div>
+
+        {imagePreview.length > 0 && (
+          <div className="mt-4 flex gap-4 flex-wrap">
+            {imagePreview.length > 0 &&
+              imagePreview.map((imageUrl, i) => (
+                <Image
+                  key={i}
+                  src={imageUrl}
+                  width={95}
+                  height={95}
+                  alt="Uploaded Image"
+                />
+              ))}
+          </div>
+        )}
 
         <Divider className="my-5"></Divider>
 
