@@ -11,6 +11,7 @@ import DatePicker from "react-datepicker";
 import FXSelect from "@/src/components/form/FXSelect";
 import { useCategories } from "@/src/hooks/categories.hook";
 import Image from "next/image";
+import FXTextArea from "@/src/components/form/FXTextArea";
 const address = require("@bangladeshi/bangladesh-address");
 
 const cityOptions = address
@@ -137,6 +138,14 @@ const CreatePost: React.FC = () => {
               ))}
           </div>
         )}
+
+        <div>
+          <FXTextArea
+            label="Description"
+            placeholder="Write details here"
+            variant="bordered"
+          ></FXTextArea>
+        </div>
 
         <Divider className="my-5"></Divider>
 
