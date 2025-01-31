@@ -5,9 +5,10 @@ interface ITextAreaProps {
   label: string;
   placeholder: string;
   variant: "flat" | "bordered" | "faded" | "underlined";
+  name: string;
 }
 
-const FXTextArea = ({ label, placeholder, variant }: ITextAreaProps) => {
+const FXTextArea = ({ label, placeholder, variant, name }: ITextAreaProps) => {
   const {
     register,
     formState: { errors },
@@ -24,7 +25,7 @@ const FXTextArea = ({ label, placeholder, variant }: ITextAreaProps) => {
         label={label}
         placeholder={placeholder}
         variant={variant}
-        {...register(label, { required: "This field is required" })}
+        {...register(name, { required: "This field is required" })}
         onClear={() => console.log("textarea cleared")}
       />
       {errorMessage && <span className="text-red-500">{errorMessage}</span>}

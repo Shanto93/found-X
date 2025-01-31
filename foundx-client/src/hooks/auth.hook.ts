@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import Swal from "sweetalert2";
 import { postLoginData, postRegisterData } from "../services/AuthServices";
 import type { FieldValues } from "react-hook-form";
 import { toast } from "sonner";

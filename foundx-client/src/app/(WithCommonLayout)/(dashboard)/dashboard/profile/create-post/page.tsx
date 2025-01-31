@@ -12,6 +12,8 @@ import FXSelect from "@/src/components/form/FXSelect";
 import { useCategories } from "@/src/hooks/categories.hook";
 import Image from "next/image";
 import FXTextArea from "@/src/components/form/FXTextArea";
+import { useUser } from "@/src/context/user.context";
+import { AddIcon, RemoveIcon } from "@/src/assets/Icons";
 const address = require("@bangladeshi/bangladesh-address");
 
 const cityOptions = address
@@ -28,7 +30,9 @@ const CreatePost: React.FC = () => {
   const [imageUpload, setImageUpload] = useState<File[] | []>([]);
   const [imagePreview, setImagePreview] = useState<string[] | []>([]);
 
-  console.log(imagePreview);
+  const { user } = useUser();
+
+  // console.log(imagePreview);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files![0];
@@ -42,7 +46,7 @@ const CreatePost: React.FC = () => {
     }
   };
 
-  console.log(imageUpload);
+  // console.log(imageUpload);
 
   const {
     data: categoryData,
@@ -83,6 +87,7 @@ const CreatePost: React.FC = () => {
       questions: data.questions.map(
         (question: { value: string }) => question.value
       ),
+      user: user?._id,
     };
     console.log(formData);
   };
@@ -105,22 +110,23 @@ const CreatePost: React.FC = () => {
           />
           <FXInput label="Location" name="location"></FXInput>
           <FXSelect label="City" name="city" options={cityOptions}></FXSelect>
-          {/* <FXInput label="Category" name="category"></FXInput> */}
+
           <FXSelect
             label="Category"
             name="category"
             options={categoryOptions}
             disabled={!isSuccess}
           ></FXSelect>
-          {/* <FXInput label="Upload Image" name="image"></FXInput> */}
           <div
-            onChange={(e) => handleImageUpload(e)}
-            className=" rounded-lg border py-[14px]"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleImageUpload(e)
+            }
+            className="rounded-lg border py-[14px]"
           >
             <label className="px-3 text-sm" htmlFor="image">
               Upload Image
             </label>
-            <input className="hidden " type="file" name="image" id="image" />
+            <input className="hidden" type="file" name="image" id="image" />
           </div>
         </div>
 
@@ -139,30 +145,37 @@ const CreatePost: React.FC = () => {
           </div>
         )}
 
-        <div>
-          <FXTextArea
-            label="Description"
-            placeholder="Write details here"
-            variant="bordered"
-          ></FXTextArea>
-        </div>
+        <FXTextArea
+          label="Description"
+          placeholder="Write details here"
+          variant="bordered"
+          name="description"
+        ></FXTextArea>
 
         <Divider className="my-5"></Divider>
 
         <div className="flex items-center justify-between">
           <h1 className="text-xm md:text-xl">Owner verification questions</h1>
-          <Button onClick={() => handleFieldAppend()}>Append</Button>
+          <Button
+            className="bg-transparent border-none hover:text-yellow-600"
+            onClick={() => handleFieldAppend()}
+          >
+            <AddIcon />{" "}
+          </Button>
         </div>
 
         {fields.map((field, index) => (
           <div key={field.id} className="flex items-center justify-between">
             <FXInput
-              className="w-full md:mr-5"
+              className="w-full md:mr-5 mt-2"
               name={`questions.${index}.value`}
               label="Questions"
             ></FXInput>
-            <Button onClick={() => remove(index)} className="">
-              Remove
+            <Button
+              onClick={() => remove(index)}
+              className="bg-transparent border-none hover:text-red-600"
+            >
+              <RemoveIcon />
             </Button>
           </div>
         ))}

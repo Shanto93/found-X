@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import type { IUser } from "../types";
 import { currentUser } from "../services/AuthServices";
